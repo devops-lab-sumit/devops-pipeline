@@ -10,7 +10,9 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Detect branch
-              run: echo "Branch is $env:GITHUB_REF"
+              run: |
+                $branch = $env=GITHUB_REF -replace 'refs/heads/',''
+                echo "Branch is $branch"
 
             - name: say Hello
               run: echo "Hello from my self-hosted org runner"
@@ -21,7 +23,9 @@ jobs:
             - name: checkout code
               uses: actions/checkout@v4
             - name: Detect branch
-              run: echo "Branch is $env:{GITHUB_REF}"
+              run: |
+                $branch = $env=GITHUB_REF -replace 'refs/heads/',''
+                echo "Branch is $branch"
             - name: say Hello
               run: echo "Hello from my self-hosted repo runner"
     
