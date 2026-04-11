@@ -1,6 +1,12 @@
 name: CI Pipeline
 on:
   push:
+  workflow_dispatch:
+      inputs:
+        version:
+          description: 'Version to build'
+          required: false
+          default: '1.0.0'
 
 jobs:
     build_from_org_runner:
@@ -13,6 +19,10 @@ jobs:
               run: |
                 $branch = $env:GITHUB_REF -replace 'refs/heads/',''
                 echo "Branch is $branch"
+
+                $sha = $env:GITHUB_SHA.Substring(0,7)
+                echo "SHA is $sha"
+                
                  if($branch -like 'release/*')
                 {
                     echo "This is a release branch"
