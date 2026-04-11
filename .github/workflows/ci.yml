@@ -3,14 +3,23 @@ on:
   push:
 
 jobs:
-    build:
+    build_from_org_runner:
         runs-on: my-runner
         steps:
             - name: checkout code
               uses: actions/checkout@v4
 
             - name: say Hello
-              run: echo "Hello from my self-hosted runner"
+              run: echo "Hello from my self-hosted org runner"
+      
+    build_from_repo_runner:
+        runs-on: self-hosted
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+            - name: say Hello
+              run: echo "Hello from my self-hosted repo runner"
+
 
               
 
