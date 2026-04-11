@@ -15,30 +15,57 @@ jobs:
             - name: checkout code
               uses: actions/checkout@v4
 
-            - name: Detect branch
+            # - name: Detect branch
+            #   run: |
+            #     $branch = $env:GITHUB_REF -replace 'refs/heads/',''
+            #     echo "Branch is $branch"
+
+            #     $sha = $env:GITHUB_SHA.Substring(0,7)
+            #     echo "SHA is $sha"
+
+            #      if($branch -like 'release/*')
+            #     {
+            #         echo "This is a release branch"
+            #     }
+            #     elseif ($branch -like 'feature/*')
+            #     {
+            #         echo "This is the feature branch"
+            #     }
+            #     else
+            #     {
+            #         echo "This is not a release branch"
+            #     }
+            - name: Detect branch and version
               run: |
-                $branch = $env:GITHUB_REF -replace 'refs/heads/',''
-                echo "Branch is $branch"
+                $branch = $env:GITHUB_REF -replace 'refs/heads/', ''
+                echo "Branch name is $branch"
+
+                $inputVersion = "${{ github.event.inputs.version }}"
+                echo "Input version is $inputVersion"
 
                 $sha = $env:GITHUB_SHA.Substring(0,7)
-                echo "SHA is $sha"
-                
-                 if($branch -like 'release/*')
-                {
-                    echo "This is a release branch"
+
+                if ($inputVersion -ne "") {
+                  echo "Using manual version"
+                  $version = $inputVersion
                 }
-                elseif ($branch -like 'feature/*')
-                {
-                    echo "This is the feature branch"
+                elseif ($branch -like "release/*") {
+                  echo "Release branch detected"
+                  $version = $branch -replace 'release/', ''
                 }
-                else
-                {
-                    echo "This is not a release branch"
+                elseif ($branch -like "feature/*") {
+                  echo "Feature branch detected"
+                  $version = $sha
+                }
+                else {
+                  echo "Other branch detected"
+                  $version = $sha
                 }
 
+                echo "Final Version is $version"
             - name: say Hello
               run: echo "Hello from my self-hosted org runner"
-  
+        
     build_from_repo_runner:
         runs-on: self-hosted
         steps:
