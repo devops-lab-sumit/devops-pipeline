@@ -63,8 +63,8 @@ jobs:
                 }
 
                 echo "Final Version is $version"
-                  - name: say Hello
-                    run: echo "Hello from my self-hosted org runner"
+            - name: say Hello
+              run: echo "Hello from my self-hosted org runner"
         
     build_from_repo_runner:
         runs-on: self-hosted
