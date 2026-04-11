@@ -6,6 +6,13 @@ jobs:
     build:
         runs-on: my-runner
         steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+
             - name: say Hello
               run: echo "Hello from my self-hosted runner"
+
+              
+
+                
 
