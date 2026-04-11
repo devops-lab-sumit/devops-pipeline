@@ -26,6 +26,18 @@ jobs:
               run: |
                 $branch = $env:GITHUB_REF -replace 'refs/heads/',''
                 echo "Branch is $branch"
+                if($branch -like 'release/*')
+                {
+                    echo "This is a release branch"
+                }
+                else if ($branch -like 'feature/*')
+                {
+                    echo "This is the feature branch"
+                }
+                else
+                {
+                    echo "This is not a release branch"
+                }
             - name: say Hello
               run: echo "Hello from my self-hosted repo runner"
     
