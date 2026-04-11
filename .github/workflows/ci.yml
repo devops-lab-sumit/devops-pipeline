@@ -2,3 +2,10 @@ name: CI Pipeline
 on:
   push:
 
+jobs:
+    build:
+        runs-on: self-hosted
+        steps:
+            - name: say Hello
+              run: echo "Hello from my self-hosted runner"
+
