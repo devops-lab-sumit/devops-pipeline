@@ -1,1 +1,72 @@
+name: CI Pipeline
+on:
+  push:
+  workflow_dispatch:
+      inputs:
+        version:
+          description: 'Version to build'
+          required: false
+          default: '1.0.0'
+
+jobs:
+    build_from_org_runner:
+        runs-on: my-runner
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+
+            - name: Detect branch
+              run: |
+                $branch = $env:GITHUB_REF -replace 'refs/heads/',''
+                echo "Branch is $branch"
+
+                $sha = $env:GITHUB_SHA.Substring(0,7)
+                echo "SHA is $sha"
+                
+                 if($branch -like 'release/*')
+                {
+                    echo "This is a release branch"
+                }
+                elseif ($branch -like 'feature/*')
+                {
+                    echo "This is the feature branch"
+                }
+                else
+                {
+                    echo "This is not a release branch"
+                }
+
+            - name: say Hello
+              run: echo "Hello from my self-hosted org runner"
+  
+    build_from_repo_runner:
+        runs-on: self-hosted
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+            - name: Detect branch
+              run: |
+                $branch = $env:GITHUB_REF -replace 'refs/heads/',''
+                echo "Branch is $branch"
+                if($branch -like 'release/*')
+                {
+                    echo "This is a release branch"
+                }
+                elseif ($branch -like 'feature/*')
+                {
+                    echo "This is the feature branch"
+                }
+                else
+                {
+                    echo "This is not a release branch"
+                }
+            - name: say Hello
+              run: echo "Hello from my self-hosted repo runner"
+    
+
+
+
+              
+
+                
 
