@@ -21,7 +21,7 @@ jobs:
             - name: checkout code
               uses: actions/checkout@v4
             - name: Detect branch
-              run: echo "Branch is $env:{GITHUB_REF}"
+              run: echo "Branch is $env:GITHUB_REF"
             - name: say Hello
               run: echo "Hello from my self-hosted repo runner"
     
