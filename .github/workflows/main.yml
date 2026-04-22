@@ -21,4 +21,4 @@ jobs:
               uses: actions/checkout@v4
             - name: Print Selected Environment
               run: |
-                echo "Selected environment is : ${{ inputs.environment }}"
+                echo "Selected environment is : ${{ github.event.inputs.environment }}"
