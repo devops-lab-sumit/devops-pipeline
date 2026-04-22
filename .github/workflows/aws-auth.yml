@@ -6,7 +6,7 @@ on:
                 description: 'AWS Account ID to assume role'
                 required: true
                 type: string
-permissions:
+
 jobs:
     auth:
         runs-on: ubuntu-latest
