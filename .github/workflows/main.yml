@@ -24,6 +24,9 @@ jobs:
         env:
                           # condition && value_if_true || value_if_false
             AWS_ACCOUNT_ID: "${{github.event.inputs.environment == 'prod' && 'PROD_ACCOUNT_ID' || '277707113274' }}"
+            ECR_REPOSITORY: devops-lab/myapp
+            AWS_REGION: ap-south-1
+
         steps:
             - name: checkout code
               uses: actions/checkout@v4
@@ -44,4 +47,9 @@ jobs:
             - name: Verify AWS Identity
               id: login-ecr
               uses: aws-actions/amazon-ecr-login@v2
+
+
+            - name: Print Image URI
+              run: echo "IMAGE_URI=${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com/${env.ECR_REPOSITORY}" >> $GITHUB_ENV
+
            
