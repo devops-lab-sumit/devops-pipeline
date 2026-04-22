@@ -51,5 +51,7 @@ jobs:
 
             - name: Print Image URI
               run: echo "IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}" >> $GITHUB_ENV
+            - name: Print Image URI
+              run: echo "Image URI = $IMAGE_URI"
 
            
