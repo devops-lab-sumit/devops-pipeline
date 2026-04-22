@@ -1,0 +1,21 @@
+name: aws-auth
+on:
+    workflow_call:
+        inputs:
+            aws_account_id:
+                description: 'AWS Account ID to assume role'
+                required: true
+                type: string
+permissions:
+jobs:
+    auth:
+        runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            contents: read
+        steps:
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                role-to-assume: arn:aws:iam::${{ inputs.aws_account_id }}:role/AwsOidcAuthRole
+                aws-region: ap-south-1
