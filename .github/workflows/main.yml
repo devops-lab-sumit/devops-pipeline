@@ -38,8 +38,8 @@ jobs:
             - name: checkout code
               uses: actions/checkout@v4
             - name: Setup AWS and ECR
-            uses: ./.github/actions/aws-ecr
-            with:
+              uses: ./.github/actions/aws-ecr
+              with:
                 aws_account_id: ${{ env.AWS_ACCOUNT_ID }}
                 aws_region: ${{ env.AWS_REGION }}
                 ecr_repository: ${{ env.ECR_REPOSITORY }}
