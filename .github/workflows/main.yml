@@ -1,0 +1,16 @@
+name: Deployment Pipeline
+on:
+    workflow_dispatch:
+        inputs:
+            environment::
+                description: 'Select environment'
+                required: true
+                type: choice
+                options:
+                    - dev
+                    - sit
+                    - uat
+                    - pnb
+                    - prod
+                default: 'dev'
+jobs:
