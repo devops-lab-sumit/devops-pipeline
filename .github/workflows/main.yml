@@ -53,5 +53,9 @@ jobs:
               run: echo "IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}" >> $GITHUB_ENV
             - name: Print Image URI
               run: echo "Image URI = $IMAGE_URI"
-
-           
+            - name: Pull Docker Image
+              run: docker pull nginx:latest
+            - name: Tag Image for ECR 
+              run: docker tag nginx:latest $IMAGE_URI:latest
+            - name: Push Image to ECR
+              run: docker push $IMAGE_URI:latest
