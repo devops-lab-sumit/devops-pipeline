@@ -13,12 +13,18 @@ on:
                     - pnb
                     - prod
                 default: 'dev'
+
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        env:
+                          # condition && value_if_true || value_if_false
+            AWS_ACCOUNT_ID: "${{github.event.inputs.environment == 'prod' && 'PROD_ACCOUNT_ID' || '277707113274' }}"
         steps:
             - name: checkout code
               uses: actions/checkout@v4
             - name: Print Selected Environment
               run: |
                 echo "Selected environment is : ${{ github.event.inputs.environment }}"
+            - name: Print AWS Account
+              run: echo "AWS Account = $AWS_ACCOUNT_ID" 
