@@ -14,3 +14,11 @@ on:
                     - prod
                 default: 'dev'
 jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+            - name: Print Selected Environment
+              run: |
+                echo "Selected environment is : ${{ inputs.environment }}"

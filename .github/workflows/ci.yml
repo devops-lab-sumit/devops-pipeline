@@ -1,6 +1,6 @@
 name: CI Pipeline
 on:
-  push:
+  # push:
   workflow_dispatch:
       inputs:
         version:
