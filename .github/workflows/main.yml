@@ -1,0 +1,9 @@
+name: Deployment Pipeline
+on:
+    workflow_dispatch:
+        inputs:
+            version:
+                description: 'Version to deploy'
+                required: true
+                default: '1.0.0'
+jobs:
