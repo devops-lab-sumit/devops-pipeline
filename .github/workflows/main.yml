@@ -2,8 +2,15 @@ name: Deployment Pipeline
 on:
     workflow_dispatch:
         inputs:
-            version:
-                description: 'Version to deploy'
+            environment::
+                description: 'Select environment'
                 required: true
-                default: '1.0.0'
+                type: choice
+                options:
+                    - dev
+                    - sit
+                    - uat
+                    - pnb
+                    - prod
+                default: 'dev'
 jobs:
